@@ -1,104 +1,196 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Thorium Games Megathread 26-27</title>
+    <title>Thorium Games Megathread 23-24</title>
     <meta charset="utf-8">
     <style>
-        /* Thorium Vibe */
+        /* Base Vibe */
         body {
             font-family: "Courier New", Courier, monospace;
             background-color: #000000;
             color: #ffffff;
-            padding: 20px;
+            padding: 30px;
             text-align: left;
             margin: 0;
+            line-height: 1.6;
         }
-        h1, h2, h3 {
+
+        /* Typography */
+        h1 {
+            font-family: "Comic Sans MS", "Comic Sans", cursive;
             color: #00ff00;
             text-shadow: 0 0 5px #00ff00;
+            font-size: 36px;
+            margin-top: 0;
+            margin-bottom: 5px;
             font-weight: normal;
         }
-        h1 { font-size: 32px; margin-bottom: 5px; }
-        .subtitle { color: #ffffff; font-size: 18px; margin-bottom: 20px; text-decoration: underline; cursor: pointer; }
+
+        h2, h3 {
+            font-family: "Comic Sans MS", "Comic Sans", cursive;
+            color: #00ff00;
+            text-shadow: 0 0 3px #00ff00;
+            font-weight: normal;
+        }
+
+        h2 { font-size: 24px; margin-top: 30px; border-bottom: 1px solid #333; padding-bottom: 5px; display: inline-block;}
         
+        /* Links & Accents */
+        .subtitle {
+            color: #ffffff;
+            font-size: 18px;
+            margin-bottom: 30px;
+            text-decoration: underline;
+            text-decoration-color: #00ff00;
+            text-decoration-thickness: 2px;
+            cursor: pointer;
+        }
+        
+        a, .link-text {
+            color: #00ff00;
+            text-decoration: underline;
+            text-decoration-color: #00ff00;
+            text-decoration-thickness: 2px;
+            cursor: pointer;
+        }
+        
+        a:hover, .link-text:hover {
+            background-color: #00ff00;
+            color: #000;
+            text-decoration: none;
+        }
+
+        /* Intro Section */
+        .intro-text {
+            max-width: 900px;
+            color: #ffffff;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
         /* Controls Container */
         .controls {
             display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
+            gap: 15px;
+            margin-bottom: 25px;
             align-items: center;
+            flex-wrap: wrap;
         }
         
         #search {
             padding: 10px; 
             width: 300px;
-            background-color: #111;
-            color: #00ff00;
-            border: 2px solid #00ff00;
+            background-color: #000;
+            color: #fff;
+            border: 2px solid #555;
             font-family: "Courier New", Courier, monospace; 
             font-size: 16px;
             outline: none;
+            transition: 0.2s;
         }
-        #search::placeholder { color: #005500; }
+        
+        #search:focus {
+            border-color: #00ff00;
+            box-shadow: 0 0 5px #00ff00;
+        }
+        
+        #search::placeholder { color: #888; }
 
         .btn {
             padding: 10px 15px;
             background-color: #000;
-            color: #00ff00;
-            border: 2px solid #00ff00;
+            color: #fff;
+            border: 2px solid #555;
             font-family: "Courier New", Courier, monospace;
             font-size: 16px;
             cursor: pointer;
             text-transform: uppercase;
             transition: 0.2s;
         }
+        
         .btn:hover {
-            background-color: #00ff00;
-            color: #000;
+            border-color: #00ff00;
+            color: #00ff00;
+            box-shadow: 0 0 5px #00ff00;
         }
         
         /* Grid Layout */
         .grid {
             display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 10px; 
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 15px; 
             max-width: 1200px; 
         }
+        
         .card {
             background: #000; 
-            border: 1px solid #003300; 
-            padding: 10px; 
+            border: 2px solid #333; 
+            padding: 15px; 
             display: flex; 
             flex-direction: column; 
             justify-content: space-between;
+            transition: 0.2s;
         }
-        .card:hover { border-color: #00ff00; }
+        
+        .card:hover { 
+            border-color: #00ff00; 
+            box-shadow: 0 0 8px rgba(0, 255, 0, 0.3);
+        }
+        
         .card h3 { 
-            margin: 0 0 10px 0; 
-            font-size: 14px; 
+            margin: 0 0 15px 0; 
+            font-size: 15px; 
             word-wrap: break-word; 
-            color: #00ff00;
+            color: #fff;
             text-shadow: none;
         }
         
-        .card-actions { display: flex; gap: 5px; }
-        .card-actions .btn { padding: 5px 10px; font-size: 12px; flex: 1; text-align: center; text-decoration: none;}
+        .card-actions { display: flex; gap: 8px; }
+        
+        .card-actions .btn { 
+            padding: 8px; 
+            font-size: 13px; 
+            flex: 1; 
+            text-align: center; 
+            text-decoration: none;
+            border-color: #333;
+            color: #fff;
+        }
+
+        .card-actions .btn.play-btn:hover {
+            border-color: #00ff00;
+            color: #00ff00;
+        }
+
+        .card-actions .btn.save-btn:hover {
+            border-color: #fff;
+            color: #fff;
+        }
 
         /* Player Area */
         .player-container { 
             display: none; 
-            margin-bottom: 20px; 
+            margin-bottom: 25px; 
             border: 2px solid #00ff00; 
-            padding: 10px;
+            padding: 15px;
             background: #000;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
         }
+        
         .player-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
-        .player-header h2 { margin: 0; font-size: 20px; }
+        
+        .player-header h2 { 
+            margin: 0; 
+            font-size: 20px; 
+            color: #00ff00;
+            border: none;
+        }
+        
         iframe { 
             width: 100%; 
             height: 600px; 
@@ -113,31 +205,32 @@
     <div class="subtitle">Thorium Games Website</div>
 
     <h2>Intro</h2>
-    <p style="max-width: 800px; line-height: 1.5; color: #ccc;">
-        Welcome to the Thorium Games Megathread! This guide is designed to help you play games and customize your school Chromebook. We created the ultimate guide for educational purposes and to demonstrate that there are plenty of ways to work around blocker extensions. Made for educational purposes mostly, we don't take responsibility.
-    </p>
+    <div class="intro-text">
+        Welcome to the Thorium Games Megathread! This guide is designed to help you unlock websites and customise your school Chromebook to make it truly your own. We created the ultimate guide for educational purposes and to demonstrate that there are plenty of ways to work around blocker extensions and regain control over your device. Made for educational purposes mostly, we don't take responsibility.
+    </div>
 
     <h2>Chapter</h2>
-    <p>Click a Chapter to direct you to that part of the Megathread.</p>
-    <ul style="list-style-type: square; color: #00ff00; line-height: 1.8;">
-        <li><span style="color: #fff;">Game Links</span> - Get working links for online games you can play.</li>
-        <li><span style="color: #fff;">Emulation</span> - Obtain links to emulators of retro gaming consoles (Coming soon).</li>
-        <li><span style="color: #fff;">School Wifi Password</span> - Access the school's secret Wifi password (Just kidding).</li>
-    </ul>
+    <div class="intro-text">
+        <p>Click a Chapter to direct you to that part of the Megathread.</p>
+        <p><span class="link-text">Game Links</span> - Get working links for online games you can play.</p>
+        <p><span class="link-text">Emulation</span> - Obtain links to emulators of retro gaming consoles (Coming soon).</p>
+        <p><span class="link-text">School Wifi Password</span> - Access the school's secret Wifi password (Just kidding).</p>
+    </div>
 
-    <hr style="border-color: #003300; margin: 30px 0;">
-
+    <!-- Player Frame (Hidden by default) -->
     <div class="player-container" id="player-container">
         <div class="player-header">
             <h2 id="playing-title">Playing...</h2>
             <div>
                 <button class="btn" onclick="toggleFullscreen()">Fullscreen</button>
-                <button class="btn" onclick="closePlayer()" style="border-color: #ff0000; color: #ff0000;">Close Game</button>
+                <button class="btn" onclick="closePlayer()" style="border-color: #ff3333; color: #ff3333;">Close Game</button>
             </div>
         </div>
         <iframe id="game-frame" allow="fullscreen; autoplay; gamepad" allowfullscreen></iframe>
     </div>
 
+    <!-- Game Library -->
+    <h2>Library</h2>
     <div class="controls">
         <input type="text" id="search" placeholder="Search games..." onkeyup="filterGames()">
         <button class="btn" onclick="playRandom()">Surprise Me</button>
@@ -528,8 +621,8 @@ zrist.html`;
                 card.innerHTML = `
                     <h3>${game.name}</h3>
                     <div class="card-actions">
-                        <button onclick="playGame('${game.file}', '${game.name}')" class="btn">Play</button>
-                        <a href="offline/${game.file}" download class="btn">Save</a>
+                        <button onclick="playGame('${game.file}', '${game.name}')" class="btn play-btn">Play</button>
+                        <a href="offline/${game.file}" download class="btn save-btn">Save</a>
                     </div>
                 `;
                 grid.appendChild(card);
@@ -538,7 +631,6 @@ zrist.html`;
 
         function playGame(filename, title) {
             const frame = document.getElementById('game-frame');
-            // Adding a parameter to hide the audio bar glitch at the bottom of some games
             frame.src = `offline/${filename}`; 
             
             document.getElementById('player-container').style.display = 'block';
@@ -554,7 +646,6 @@ zrist.html`;
             const randomIndex = Math.floor(Math.random() * visibleCards.length);
             const randomCard = visibleCards[randomIndex];
             
-            // Find the game object that matches the clicked card's title
             const titleText = randomCard.querySelector('h3').textContent;
             const game = allGames.find(g => g.name === titleText);
             
