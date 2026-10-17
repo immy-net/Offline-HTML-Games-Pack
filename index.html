@@ -792,35 +792,375 @@ zrist.html`;
 
         let allGames = [];
 
+        // Explicit genre map for accurate sorting
+        const genreMap = {
+            // Action & Shooter
+            '1v1.lol.html': 'Action & Shooter',
+            '12-mini-battles.html': 'Action & Shooter',
+            'awesome-tanks-2.html': 'Action & Shooter',
+            'awesome-tanks.html': 'Action & Shooter',
+            'backrooms.html': 'Action & Shooter',
+            'bacon-may-die.html': 'Action & Shooter',
+            'bank-robbery-2.html': 'Action & Shooter',
+            'bank-robbery-3.html': 'Action & Shooter',
+            'bow-masters.html': 'Action & Shooter',
+            'breaking-the-bank.html': 'Action & Shooter',
+            'fnaf-2.html': 'Action & Shooter',
+            'fnaf-3.html': 'Action & Shooter',
+            'fnaf-4.html': 'Action & Shooter',
+            'fnaf-sister-location.html': 'Action & Shooter',
+            'fnaf.html': 'Action & Shooter',
+            'funny-shooter-2.html': 'Action & Shooter',
+            'getaway-shootout.html': 'Action & Shooter',
+            'gladi-hoppers.html': 'Action & Shooter',
+            'granny-2.html': 'Action & Shooter',
+            'granny.html': 'Action & Shooter',
+            'infiltrating-the-airship.html': 'Action & Shooter',
+            'madness-project-nexus.html': 'Action & Shooter',
+            'murder.html': 'Action & Shooter',
+            'ragdoll-archers.htm': 'Action & Shooter',
+            'ragdoll-hit.html': 'Action & Shooter',
+            'rooftop-snipers-2.html': 'Action & Shooter',
+            'rooftop-snipers.htm': 'Action & Shooter',
+            'stealing-the-diamond.html': 'Action & Shooter',
+            'stick-archers-battle.html': 'Action & Shooter',
+            'stick-fighter.html': 'Action & Shooter',
+            'superhot.html': 'Action & Shooter',
+            'they-are-coming.html': 'Action & Shooter',
+            'time-shooter-2.html': 'Action & Shooter',
+            'time-shooter-3.htm': 'Action & Shooter',
+            'tomb-of-the-mask.htm': 'Action & Shooter',
+            'war-the-knights.html': 'Action & Shooter',
+            'zombie-rush.html': 'Action & Shooter',
+            'among-us.html': 'Action & Shooter',
+            'evil-glitch.html': 'Action & Shooter',
+            'fleeing-the-complex.html': 'Action & Shooter',
+            'escaping-the-prison.html': 'Action & Shooter',
+
+            // Racing & Driving
+            '3D-flight-simulator.html': 'Racing & Driving',
+            'blumgi-racers.html': 'Racing & Driving',
+            'blumgi-rocket.html': 'Racing & Driving',
+            'bouncy-motors.html': 'Racing & Driving',
+            'car-king-arena.html': 'Racing & Driving',
+            'crazy-cars.html': 'Racing & Driving',
+            'crazy-crash-landing.html': 'Racing & Driving',
+            'crazy-motorcycle.html': 'Racing & Driving',
+            'demolition-derby-crash-racing.html': 'Racing & Driving',
+            'drift-boss.htm': 'Racing & Driving',
+            'drift-hunters-pro.html': 'Racing & Driving',
+            'drive-mad.htm': 'Racing & Driving',
+            'eggy-car.html': 'Racing & Driving',
+            'funny-mad-racing.html': 'Racing & Driving',
+            'happy-wheels.html': 'Racing & Driving',
+            'highway-traffic.html': 'Racing & Driving',
+            'hill-climb-racing-lite.html': 'Racing & Driving',
+            'hover-racer-drive.html': 'Racing & Driving',
+            'madalin-stunt-cars-2.html': 'Racing & Driving',
+            'merge-round-racers.html': 'Racing & Driving',
+            'monster-tracks.html': 'Racing & Driving',
+            'moto-x3m-2.html': 'Racing & Driving',
+            'moto-x3m-3.html': 'Racing & Driving',
+            'moto-x3m-pool-party.html': 'Racing & Driving',
+            'moto-x3m-spooky-land.html': 'Racing & Driving',
+            'moto-x3m-winter.html': 'Racing & Driving',
+            'moto-x3m.htm': 'Racing & Driving',
+            'parking-fury-2.html': 'Racing & Driving',
+            'parking-fury-3.html': 'Racing & Driving',
+            'parking-fury.html': 'Racing & Driving',
+            'retro-highway.html': 'Racing & Driving',
+            'slow-roads.html': 'Racing & Driving',
+            'snow-rider.htm': 'Racing & Driving',
+            'snow-road.htm': 'Racing & Driving',
+            'super-bike-the-champion.html': 'Racing & Driving',
+            'super-star-car.html': 'Racing & Driving',
+            'tap-road.html': 'Racing & Driving',
+            'wheelie-bike.html': 'Racing & Driving',
+
+            // Sports
+            '1-on-1-soccer.html': 'Sports',
+            '1-on-1-tennis.html': 'Sports',
+            '3d-free-kick.html': 'Sports',
+            '8-ball-classic.html': 'Sports',
+            'baseball-bros.html': 'Sports',
+            'basket-bros.html': 'Sports',
+            'basket-random.html': 'Sports',
+            'basketball-legends.html': 'Sports',
+            'basketball-stars.html': 'Sports',
+            'boxing-random.htm': 'Sports',
+            'football-bros.html': 'Sports',
+            'football-legends.html': 'Sports',
+            'google-baseball.html': 'Sports',
+            'karate-bros.html': 'Sports',
+            'kart-bros.html': 'Sports',
+            'ping-pong-chaos.html': 'Sports',
+            'retro-bowl-college.html': 'Sports',
+            'retro-bowl.html': 'Sports',
+            'rocket-soccer-derby.html': 'Sports',
+            'soccer-bros.html': 'Sports',
+            'soccer-random.htm': 'Sports',
+            'super-liquid-soccer.html': 'Sports',
+            'table-tennis-world-tour.html': 'Sports',
+            'volley-random.html': 'Sports',
+            'wrestle-bros.html': 'Sports',
+            'ragdoll-soccer.html': 'Sports',
+            'retro-ping-pong.html': 'Sports',
+
+            // Puzzle & Strategy
+            '2048-cupcakes.html': 'Puzzle & Strategy',
+            '2048.html': 'Puzzle & Strategy',
+            '9007199254740992.html': 'Puzzle & Strategy',
+            'age-of-war-2.html': 'Puzzle & Strategy',
+            'age-of-war.html': 'Puzzle & Strategy',
+            'ages-of-conflict.html': 'Puzzle & Strategy',
+            'angry-birds-showdown.html': 'Puzzle & Strategy',
+            'angry-birds-space.html': 'Puzzle & Strategy',
+            'angry-birds.html': 'Puzzle & Strategy',
+            'bad-piggies.html': 'Puzzle & Strategy',
+            'big-ice-tower-tiny-square.html': 'Puzzle & Strategy',
+            'big-neon-tower-tiny-square.html': 'Puzzle & Strategy',
+            'big-tower-tiny-square-2.html': 'Puzzle & Strategy',
+            'big-tower-tiny-square.html': 'Puzzle & Strategy',
+            'bloons-TD-2.html': 'Puzzle & Strategy',
+            'bloons-TD-3.html': 'Puzzle & Strategy',
+            'bloons-TD-4.html': 'Puzzle & Strategy',
+            'bloons-TD-5.html': 'Puzzle & Strategy',
+            'bloons-TD.html': 'Puzzle & Strategy',
+            'bloxorz.html': 'Puzzle & Strategy',
+            'bubble-shooter.html': 'Puzzle & Strategy',
+            'candy-crush.html': 'Puzzle & Strategy',
+            'chess.html': 'Puzzle & Strategy',
+            'circloO-2.html': 'Puzzle & Strategy',
+            'circloO.html': 'Puzzle & Strategy',
+            'clash-of-vikings.html': 'Puzzle & Strategy',
+            'cookie-clicker.htm': 'Puzzle & Strategy',
+            'coreball.html': 'Puzzle & Strategy',
+            'cut-the-rope-2.html': 'Puzzle & Strategy',
+            'cut-the-rope-holiday-gift.html': 'Puzzle & Strategy',
+            'cut-the-rope-time-travel.html': 'Puzzle & Strategy',
+            'cut-the-rope.html': 'Puzzle & Strategy',
+            'draw-climber.html': 'Puzzle & Strategy',
+            'fireblob.html': 'Puzzle & Strategy',
+            'fruit-ninja.html': 'Puzzle & Strategy',
+            'guess-their-answer.html': 'Puzzle & Strategy',
+            'helix-jump.html': 'Puzzle & Strategy',
+            'idle-breakout.html': 'Puzzle & Strategy',
+            'idle-dice.html': 'Puzzle & Strategy',
+            'level-devil.html': 'Puzzle & Strategy',
+            'little-alchemy-2.html': 'Puzzle & Strategy',
+            'minesweeper.html': 'Puzzle & Strategy',
+            'openTTD.html': 'Puzzle & Strategy',
+            'opposite-day.html': 'Puzzle & Strategy',
+            'papas-bakeria.html': 'Puzzle & Strategy',
+            'papas-burgeria.html': 'Puzzle & Strategy',
+            'papas-cheeseria.html': 'Puzzle & Strategy',
+            'papas-cupcakeria.html': 'Puzzle & Strategy',
+            'papas-donuteria.html': 'Puzzle & Strategy',
+            'papas-freezeria.html': 'Puzzle & Strategy',
+            'papas-hot-doggeria.html': 'Puzzle & Strategy',
+            'papas-pancakeria.html': 'Puzzle & Strategy',
+            'papas-pastaria.html': 'Puzzle & Strategy',
+            'papas-pizzeria.html': 'Puzzle & Strategy',
+            'papas-scooperia.html': 'Puzzle & Strategy',
+            'papas-sushiria.html': 'Puzzle & Strategy',
+            'papas-taco-mia.html': 'Puzzle & Strategy',
+            'papas-wingeria.html': 'Puzzle & Strategy',
+            'plants-vs-zombies.html': 'Puzzle & Strategy',
+            'riddle-school-2.html': 'Puzzle & Strategy',
+            'riddle-school-3.html': 'Puzzle & Strategy',
+            'riddle-school-4.html': 'Puzzle & Strategy',
+            'riddle-school-5.html': 'Puzzle & Strategy',
+            'riddle-school.html': 'Puzzle & Strategy',
+            'riddle-transfer-2.html': 'Puzzle & Strategy',
+            'riddle-transfer.html': 'Puzzle & Strategy',
+            'sand-game.html': 'Puzzle & Strategy',
+            'short-life.html': 'Puzzle & Strategy',
+            'six-cats-under.html': 'Puzzle & Strategy',
+            'stack.html': 'Puzzle & Strategy',
+            'stacktris.html': 'Puzzle & Strategy',
+            'the-impossible-quiz-2.html': 'Puzzle & Strategy',
+            'the-impossible-quiz.html': 'Puzzle & Strategy',
+            'there-is-no-g.html': 'Puzzle & Strategy',
+            'this-is-the-only-level-too.html': 'Puzzle & Strategy',
+            'this-is-the-only-level.html': 'Puzzle & Strategy',
+            'trap-the-cat.html': 'Puzzle & Strategy',
+            'trivia-crack.html': 'Puzzle & Strategy',
+            'wordle-unlimited.html': 'Puzzle & Strategy',
+            'worlds-hardest-game-2.html': 'Puzzle & Strategy',
+            'worlds-hardest-game-3.html': 'Puzzle & Strategy',
+            'worlds-hardest-game.html': 'Puzzle & Strategy',
+            'zrist.html': 'Puzzle & Strategy',
+
+            // Platformer & Adventure
+            'bob-the-robber-2.html': 'Platformer & Adventure',
+            'bob-the-robber-5.html': 'Platformer & Adventure',
+            'bob-the-robber.html': 'Platformer & Adventure',
+            'dadish-2.html': 'Platformer & Adventure',
+            'dadish-3.html': 'Platformer & Adventure',
+            'dadish.html': 'Platformer & Adventure',
+            'doodle-jump.html': 'Platformer & Adventure',
+            'duck-life-2.html': 'Platformer & Adventure',
+            'duck-life-3.html': 'Platformer & Adventure',
+            'duck-life-4.html': 'Platformer & Adventure',
+            'duck-life-5.html': 'Platformer & Adventure',
+            'duck-life.html': 'Platformer & Adventure',
+            'eagle-ride.html': 'Platformer & Adventure',
+            'fancy-pants-adventure-2.html': 'Platformer & Adventure',
+            'fancy-pants-adventure.html': 'Platformer & Adventure',
+            'fireboy-and-watergirl-2.html': 'Platformer & Adventure',
+            'fireboy-and-watergirl-3.html': 'Platformer & Adventure',
+            'fireboy-and-watergirl-4.html': 'Platformer & Adventure',
+            'fireboy-and-watergirl.html': 'Platformer & Adventure',
+            'get-on-top.html': 'Platformer & Adventure',
+            'house-of-hazards.html': 'Platformer & Adventure',
+            'ice-dodo.html': 'Platformer & Adventure',
+            'iron-snout.html': 'Platformer & Adventure',
+            'jetpack-joyride.html': 'Platformer & Adventure',
+            'jumping-shell.html': 'Platformer & Adventure',
+            'learn-to-fly-2.html': 'Platformer & Adventure',
+            'learn-to-fly-3.html': 'Platformer & Adventure',
+            'learn-to-fly-idle.html': 'Platformer & Adventure',
+            'learn-to-fly.html': 'Platformer & Adventure',
+            'ovo-2.html': 'Platformer & Adventure',
+            'ovo-3-dimensions.html': 'Platformer & Adventure',
+            'ovo.html': 'Platformer & Adventure',
+            'picos-school.html': 'Platformer & Adventure',
+            'red-ball-4-vol-1.html': 'Platformer & Adventure',
+            'red-ball-4-vol-2.html': 'Platformer & Adventure',
+            'red-ball-4-vol-3.html': 'Platformer & Adventure',
+            'rooftop-run.html': 'Platformer & Adventure',
+            'run-2.html': 'Platformer & Adventure',
+            'run-3.html': 'Platformer & Adventure',
+            'run.html': 'Platformer & Adventure',
+            'space-is-key-2.html': 'Platformer & Adventure',
+            'space-is-key.html': 'Platformer & Adventure',
+            'space-waves.html': 'Platformer & Adventure',
+            'stickman-hook.html': 'Platformer & Adventure',
+            'tanuki-sunset.html': 'Platformer & Adventure',
+            'tube-jumpers.html': 'Platformer & Adventure',
+            'unicycle-hero.html': 'Platformer & Adventure',
+            'vex-4.html': 'Platformer & Adventure',
+            'vex-5.html': 'Platformer & Adventure',
+            'vex-6.htm': 'Platformer & Adventure',
+            'vex-7.htm': 'Platformer & Adventure',
+            'vex-8.htm': 'Platformer & Adventure',
+            'vex-x3m-2.html': 'Platformer & Adventure',
+            'vex-x3m.html': 'Platformer & Adventure',
+            'wheely-2.html': 'Platformer & Adventure',
+            'wheely-3.html': 'Platformer & Adventure',
+            'wheely-4.html': 'Platformer & Adventure',
+            'wheely-5.html': 'Platformer & Adventure',
+            'wheely-6.html': 'Platformer & Adventure',
+            'wheely-7.html': 'Platformer & Adventure',
+            'wheely-8.html': 'Platformer & Adventure',
+            'wheely.html': 'Platformer & Adventure',
+            'poor-bunny.html': 'Platformer & Adventure',
+            'kittytoy.html': 'Platformer & Adventure',
+            'geometry-dash-lite.html': 'Platformer & Adventure',
+            'geometry-dash.html': 'Platformer & Adventure',
+            'geometry-vibes.html': 'Platformer & Adventure',
+            'pixel-speedrun.html': 'Platformer & Adventure',
+            'speed-stars.html': 'Platformer & Adventure',
+
+            // IO & Multiplayer
+            '1.12.html': 'IO & Multiplayer',
+            '1.12_WASM.html': 'IO & Multiplayer',
+            '1.5.html': 'IO & Multiplayer',
+            '1.8.html': 'IO & Multiplayer',
+            '1.8_WASM.html': 'IO & Multiplayer',
+            'agar-io-lite.html': 'IO & Multiplayer',
+            'cleanup-io.html': 'IO & Multiplayer',
+            'cluster-rush.html': 'IO & Multiplayer',
+            'ducklings-io.html': 'IO & Multiplayer',
+            'hole-io.html': 'IO & Multiplayer',
+            'paper-io-2.htm': 'IO & Multiplayer',
+            'snowball-io.html': 'IO & Multiplayer',
+            'state-io.html': 'IO & Multiplayer',
+            'tag.html': 'IO & Multiplayer',
+            'territorial-io.html': 'IO & Multiplayer',
+            'tunnel-rush.html': 'IO & Multiplayer',
+            'yohoho-io.html': 'IO & Multiplayer',
+            'slope-2-player.html': 'IO & Multiplayer',
+            'slope-3.html': 'IO & Multiplayer',
+            'slope.html': 'IO & Multiplayer',
+            'stick-merge.html': 'IO & Multiplayer',
+
+            // Simulation & Casual
+            'bad-ice-cream-2.html': 'Simulation & Casual',
+            'bad-ice-cream-3.html': 'Simulation & Casual',
+            'bad-ice-cream.html': 'Simulation & Casual',
+            'bad-parenting.html': 'Simulation & Casual',
+            'bad-time-simulator.html': 'Simulation & Casual',
+            'baldis-basics.html': 'Simulation & Casual',
+            'bitlife.html': 'Simulation & Casual',
+            'capybara-clicker.html': 'Simulation & Casual',
+            'car-drawing.html': 'Simulation & Casual',
+            'eugenes-life.html': 'Simulation & Casual',
+            'friday-night-funkin.html': 'Simulation & Casual',
+            'jacksmith.html': 'Simulation & Casual',
+            'johnny-trigger.html': 'Simulation & Casual',
+            'melon-playground.html': 'Simulation & Casual',
+            'motherload.html': 'Simulation & Casual',
+            'noob-miner.html': 'Simulation & Casual',
+            'plonky.html': 'Simulation & Casual',
+            'polytrack.html': 'Simulation & Casual',
+            'pou.html': 'Simulation & Casual',
+            'sandbox-city.html': 'Simulation & Casual',
+            'spacebar-clicker.html': 'Simulation & Casual',
+            'sprunki.html': 'Simulation & Casual',
+            'tiny-fishing.html': 'Simulation & Casual',
+            'we-become-what-we-behold.html': 'Simulation & Casual',
+            'bit-planes.htm': 'Simulation & Casual',
+            'elastic-face.htm': 'Simulation & Casual',
+            'choppy-orc.html': 'Simulation & Casual',
+
+            // Retro & Arcade
+            'flappy-bird.html': 'Retro & Arcade',
+            'google-dino.html': 'Retro & Arcade',
+            'pac-man.html': 'Retro & Arcade',
+            'tetrominoes.html': 'Retro & Arcade',
+            'Alpha_1.2.6.html': 'Retro & Arcade',
+            'Beta_1.3.html': 'Retro & Arcade',
+            'Indev.html': 'Retro & Arcade',
+            'monkey-mart.htm': 'Retro & Arcade',
+            'crossy-road.htm': 'Retro & Arcade',
+            'dreadhead-parkour.htm': 'Retro & Arcade',
+            'sm-63.html': 'Retro & Arcade',
+            'sm-64.html': 'Retro & Arcade',
+            'escape-road-2.html': 'Retro & Arcade',
+            'escape-road-3.html': 'Retro & Arcade',
+            'escape-road.html': 'Retro & Arcade',
+            'flood-runner-2.html': 'Retro & Arcade',
+            'flood-runner-3.html': 'Retro & Arcade',
+            'flood-runner-4.html': 'Retro & Arcade',
+            'snail-bob-2.html': 'Retro & Arcade',
+            'snail-bob-3.html': 'Retro & Arcade',
+            'snail-bob-4.html': 'Retro & Arcade',
+            'snail-bob-5.html': 'Retro & Arcade',
+            'snail-bob-6.html': 'Retro & Arcade',
+            'snail-bob-7.html': 'Retro & Arcade',
+            'snail-bob-8.html': 'Retro & Arcade',
+            'snail-bob.html': 'Retro & Arcade',
+        };
+
         // Categorization helper
         function getCategory(filename) {
+            // Check explicit map first
+            if (genreMap[filename]) {
+                return genreMap[filename];
+            }
+            // Fallback to regex for unlisted games
             const name = filename.replace('.html', '').replace('.htm', '').toLowerCase();
             
-            // Action / shooter / fighting
             if (/fnaf|shooter|superhot|stick-fighter|murder|getaway|zombie|knight|war|gladi|battle|combat|sniper|archer|bow|tank|flee|escape|prison|heist|robbery|steal|diamond|infiltrat|airship|backrooms|granny|evil|glitch|they-are-coming|deadly|death|chase|we-become|tomb|temple|mask|madness|doom|wolf|quake|halo|call-of|battlefield|pubg|fortnite|among-us|fall-guys|squid/i.test(name)) return 'Action & Shooter';
-            
-            // Racing / driving
             if (/race|racing|drift|car|moto|bike|wheel|truck|monster|stunt|highway|traffic|parking|derby|kart|speed|turbo|nitro|driving|road|racer|slope|hover|rocket-league|sled|snow-rider|snow-road|moto-x3m|madalin|burnout|need-for|gran-turismo|f1/i.test(name)) return 'Racing & Driving';
-            
-            // Sports
             if (/soccer|football|basket|baseball|tennis|golf|boxing|wrestle|volley|ping-pong|table-tennis|8-ball|pool|billiard|bowl|hockey|rugby|cricket|dodgeball|karate|ufc|mma|skate|surf|extreme|olympic|sports|champion|league|cup|tournament/i.test(name)) return 'Sports';
-            
-            // Puzzle / strategy / board
             if (/2048|chess|checkers|minesweeper|sudoku|solitaire|tetris|tetromino|stack|bloxorz|circlo|riddle|quiz|trivia|wordle|alchemy|merge|idle|clicker|cookie|tap|sand|sandbox|city|openTTD|polytrack|level-devil|trap|impossible|only-level|there-is-no|opposite|guess|melon|kitty|pou|doodle|jump|helix|ball|bounce|stacktris|stack|sort|match|memory|logic|brain|puzzle|strategy|tower-defense|bloons|plants-vs|pvz|clash|age-of|war|empire|civilization|anno|tropico|simcity|the-sims|tycoon|rollercoaster|zoo|hospital|game-dev|papa|baker|burger|cheese|cupcake|donut|freeze|hot-dog|pancake|pasta|pizza|scoop|sushi|taco|wing|jacksmith|motherload|noob-miner|sand-game|sandbox-city|short-life|six-cats|zrist/i.test(name)) return 'Puzzle & Strategy';
-            
-            // Platformers / adventure
             if (/mario|sonic|zelda|metroid|castlevania|kirby|donkey|crash|spyro|rayman|duck-life|duckling|dadish|fancy-pants|fireboy|watergirl|cut-the-rope|bob-the-robber|bacon|bad-ice|bad-pig|baldi|granny|slender|amnesia|penumbra|outlast|limbo|inside|little-nightmare|hollow-knight|ori|celeste|super-meat|dead-cells|rogue|adventure|platform|jump|run|dash|jump|jetpack|joyride|eagle-ride|free-rider|get-on-top|happy-wheels|house-of-hazards|ice-dodo|iron-snout|learn-to-fly|ovo|picos|red-ball|rooftop|run|space-is-key|space-waves|tanuki|unicycle|vex|wheely|worlds-hardest|unfair|mario|retro|pixel|speedrun|geometry|dash|vibes|sprunki|choppy|jumping-shell|kittytoy|poor-bunny|short-life/i.test(name)) return 'Platformer & Adventure';
-            
-            // IO / .io games / multiplayer
             if (/\.io|1v1|agar|slither|diep|surviv|zombs|krunker|shell|territorial|state|snowball|hole|paper|cleanup|cluster|ducklings|yohoho|tag|tunnel-rush|slope|1-on-1|12-mini|1v1\.lol/i.test(name)) return 'IO & Multiplayer';
-            
-            // Simulation / sandbox / casual
             if (/simulator|sim|sandbox|city|tycoon|farm|builder|craft|mine|terraria|stardew|animal-crossing|harvest|moon|gardening|fishing|tiny-fishing|car-drawing|draw-climber|melon|playground|plonky|slow-roads|sand-game|sandbox-city|idle|clicker|cookie|spacebar|capybara|bitlife|eugenes-life|bit-planes|territorial|openTTD|polytrack|not|baldis|friday-night|funkin|rhythm|music|dance|beat|guitar|piano|osu|geometry|dash|sprunki|incredibox|scratch|cat|kitty|pou|virtual|pet|tamagotchi|neo|pet|dino|google-dino|flappy|bird/i.test(name)) return 'Simulation & Casual';
-            
-            // Retro / classic
             if (/pac-man|space-invaders|asteroids|centipede|galaga|dig-dug|frogger|qbert|tetris|pong|breakout|arcade|retro|classic|atari|nes|snes|sega|genesis|n64|gameboy|gba|ps1|playstation|mame|neo-geo|cps|emulat|webretro/i.test(name)) return 'Retro & Arcade';
             
-            // Fallback
             return 'Other';
         }
 
@@ -838,6 +1178,16 @@ zrist.html`;
                 });
 
             renderGamesByCategory(allGames);
+        }
+
+        // Natural sorting helper
+        function naturalSort(a, b) {
+            // Ignore "the " at the beginning of a title
+            const cleanA = a.name.toLowerCase().replace(/^the\s+/, '');
+            const cleanB = b.name.toLowerCase().replace(/^the\s+/, '');
+            
+            // Use localeCompare with numeric option to handle numbers correctly (1, 2, 10, 2048)
+            return cleanA.localeCompare(cleanB, undefined, { numeric: true, sensitivity: 'base' });
         }
 
         function renderGamesByCategory(games) {
@@ -870,7 +1220,8 @@ zrist.html`;
                 grid.className = 'grid';
                 grid.style.marginBottom = '25px';
 
-                categories[cat].sort((a, b) => a.name.localeCompare(b.name)).forEach(game => {
+                // APPLYING THE NATURAL SORT HERE
+                categories[cat].sort(naturalSort).forEach(game => {
                     const card = document.createElement('div');
                     card.className = 'card';
                     card.innerHTML = `
