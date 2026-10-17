@@ -293,7 +293,14 @@
             text-shadow: 0 0 5px var(--neon), 0 0 12px rgba(0, 255, 0, 0.4);
         }
 
-        .player-header > div { display: flex; gap: 8px; }
+        .player-header > div { display: flex; gap: 8px; flex-wrap: wrap; }
+
+        .player-hint {
+            font-size: 12px;
+            color: var(--muted);
+            margin-bottom: 10px;
+            text-shadow: 0 0 3px rgba(0, 255, 0, 0.15);
+        }
 
         iframe {
             width: 100%;
@@ -367,11 +374,13 @@
         <div class="player-header">
             <h2 id="playing-title">Playing...</h2>
             <div>
+                <button class="btn" onclick="focusGame()">Focus Game</button>
                 <button class="btn" onclick="toggleFullscreen()">Fullscreen</button>
                 <button class="btn close-btn" onclick="closePlayer()">Close Game</button>
             </div>
         </div>
-        <iframe id="game-frame" allow="fullscreen; autoplay; gamepad" allowfullscreen></iframe>
+        <div class="player-hint">Tip: If keys don't work (especially in Eaglercraft), click once inside the game window or hit "Focus Game".</div>
+        <iframe id="game-frame" allow="fullscreen; autoplay; gamepad" allowfullscreen tabindex="0"></iframe>
     </div>
 
     <!-- Emulation Section -->
@@ -865,12 +874,38 @@ zrist.html`;
 
         function playGame(filename, title) {
             const frame = document.getElementById('game-frame');
+
+            // Focus the iframe after load so keyboard input reaches the game
+            // (critical for Eaglercraft / WASM builds inside an iframe)
+            frame.onload = () => {
+                try {
+                    frame.focus();
+                    frame.contentWindow.focus();
+                } catch (e) {
+                    /* cross-origin restriction, ignore */
+                }
+            };
+
             frame.src = `offline/${filename}`;
 
             document.getElementById('player-container').style.display = 'block';
             document.getElementById('playing-title').textContent = `Playing: ${title}`;
 
+            // Focus immediately too (in case onload already fired / cached)
+            frame.focus();
+            try { frame.contentWindow.focus(); } catch (e) {}
+
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function focusGame() {
+            const frame = document.getElementById('game-frame');
+            frame.focus();
+            try {
+                frame.contentWindow.focus();
+            } catch (e) {
+                /* cross-origin restriction, ignore */
+            }
         }
 
         function playRandom() {
@@ -895,10 +930,13 @@ zrist.html`;
             } else if (frame.msRequestFullscreen) { /* IE11 */
                 frame.msRequestFullscreen();
             }
+            // Fullscreen usually grants focus, but call anyway
+            setTimeout(focusGame, 100);
         }
 
         function closePlayer() {
             const frame = document.getElementById('game-frame');
+            frame.onload = null;
             frame.src = 'about:blank';
             document.getElementById('player-container').style.display = 'none';
         }
