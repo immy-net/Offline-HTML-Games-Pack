@@ -1,56 +1,152 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Thorium Game Hub</title>
+    <title>Thorium Games Megathread 23-24</title>
     <meta charset="utf-8">
     <style>
+        /* Thorium Vibe */
         body {
-            font-family: "Comic Sans MS", "Comic Sans", cursive;
-            background-color: #f0f0f0;
-            color: #000;
+            font-family: "Courier New", Courier, monospace;
+            background-color: #000000;
+            color: #ffffff;
             padding: 20px;
-            text-align: center;
+            text-align: left;
+            margin: 0;
         }
-        h1 { color: #ff4500; text-shadow: 2px 2px #000; }
+        h1, h2, h3 {
+            color: #00ff00;
+            text-shadow: 0 0 5px #00ff00;
+            font-weight: normal;
+        }
+        h1 { font-size: 32px; margin-bottom: 5px; }
+        .subtitle { color: #ffffff; font-size: 18px; margin-bottom: 20px; text-decoration: underline; cursor: pointer; }
+        
+        /* Controls Container */
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+        
         #search {
-            padding: 10px; width: 80%; max-width: 500px;
-            font-family: "Comic Sans MS", cursive; font-size: 18px;
-            border: 3px solid #000; border-radius: 10px; margin-bottom: 20px;
+            padding: 10px; 
+            width: 300px;
+            background-color: #111;
+            color: #00ff00;
+            border: 2px solid #00ff00;
+            font-family: "Courier New", Courier, monospace; 
+            font-size: 16px;
+            outline: none;
         }
+        #search::placeholder { color: #005500; }
+
+        .btn {
+            padding: 10px 15px;
+            background-color: #000;
+            color: #00ff00;
+            border: 2px solid #00ff00;
+            font-family: "Courier New", Courier, monospace;
+            font-size: 16px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: 0.2s;
+        }
+        .btn:hover {
+            background-color: #00ff00;
+            color: #000;
+        }
+        
+        /* Grid Layout */
         .grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 15px; max-width: 1200px; margin: 0 auto;
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px; 
+            max-width: 1200px; 
         }
         .card {
-            background: #fff; border: 3px solid #000; border-radius: 10px;
-            padding: 15px; box-shadow: 4px 4px 0px #000;
-            display: flex; flex-direction: column; justify-content: space-between;
+            background: #000; 
+            border: 1px solid #003300; 
+            padding: 10px; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: space-between;
         }
-        .card h3 { margin: 0 0 5px 0; font-size: 18px; word-wrap: break-word; }
-        .btn {
-            display: inline-block; padding: 8px 15px; margin: 5px;
-            background: #00ff00; border: 2px solid #000; border-radius: 5px;
-            text-decoration: none; color: #000; font-weight: bold; cursor: pointer;
+        .card:hover { border-color: #00ff00; }
+        .card h3 { 
+            margin: 0 0 10px 0; 
+            font-size: 14px; 
+            word-wrap: break-word; 
+            color: #00ff00;
+            text-shadow: none;
         }
-        .btn.download { background: #00bfff; }
-        .btn:hover { transform: scale(1.05); }
-        iframe { width: 100%; height: 600px; border: 3px solid #000; display: none; margin-top: 20px; border-radius: 10px;}
-        .player-container { max-width: 1000px; margin: 20px auto; text-align: left; }
+        
+        .card-actions { display: flex; gap: 5px; }
+        .card-actions .btn { padding: 5px 10px; font-size: 12px; flex: 1; text-align: center; text-decoration: none;}
+
+        /* Player Area */
+        .player-container { 
+            display: none; 
+            margin-bottom: 20px; 
+            border: 2px solid #00ff00; 
+            padding: 10px;
+            background: #000;
+        }
+        .player-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .player-header h2 { margin: 0; font-size: 20px; }
+        iframe { 
+            width: 100%; 
+            height: 600px; 
+            border: none; 
+            background: #fff; 
+        }
     </style>
 </head>
 <body>
-    <h1>🎮 Thorium Game Hub 🎮</h1>
-    
-    <div class="player-container">
-        <input type="text" id="search" placeholder="Search games..." onkeyup="filterGames()">
-        <button class="btn" onclick="closePlayer()" id="close-btn" style="display:none;">Close Game</button>
+
+    <h1>Thorium Games Megathread 23-24</h1>
+    <div class="subtitle">Thorium Games Website</div>
+
+    <h2>Intro</h2>
+    <p style="max-width: 800px; line-height: 1.5; color: #ccc;">
+        Welcome to the Thorium Games Megathread! This guide is designed to help you play games and customize your school Chromebook. We created the ultimate guide for educational purposes and to demonstrate that there are plenty of ways to work around blocker extensions. Made for educational purposes mostly, we don't take responsibility.
+    </p>
+
+    <h2>Chapter</h2>
+    <p>Click a Chapter to direct you to that part of the Megathread.</p>
+    <ul style="list-style-type: square; color: #00ff00; line-height: 1.8;">
+        <li><span style="color: #fff;">Game Links</span> - Get working links for online games you can play.</li>
+        <li><span style="color: #fff;">Emulation</span> - Obtain links to emulators of retro gaming consoles (Coming soon).</li>
+        <li><span style="color: #fff;">School Wifi Password</span> - Access the school's secret Wifi password (Just kidding).</li>
+    </ul>
+
+    <hr style="border-color: #003300; margin: 30px 0;">
+
+    <div class="player-container" id="player-container">
+        <div class="player-header">
+            <h2 id="playing-title">Playing...</h2>
+            <div>
+                <button class="btn" onclick="toggleFullscreen()">Fullscreen</button>
+                <button class="btn" onclick="closePlayer()" style="border-color: #ff0000; color: #ff0000;">Close Game</button>
+            </div>
+        </div>
         <iframe id="game-frame" allow="fullscreen; autoplay; gamepad" allowfullscreen></iframe>
+    </div>
+
+    <div class="controls">
+        <input type="text" id="search" placeholder="Search games..." onkeyup="filterGames()">
+        <button class="btn" onclick="playRandom()">Surprise Me</button>
     </div>
 
     <div class="grid" id="game-grid"></div>
 
     <script>
-        // AUTOMATICALLY EXTRACTED FROM YOUR FILE LIST
+        // The exact list you provided
         const rawFileList = `1-on-1-soccer.html
 1-on-1-tennis.html
 1.12.html
@@ -404,8 +500,10 @@ yohoho-io.html
 zombie-rush.html
 zrist.html`;
 
+        let allGames = [];
+
         function loadGames() {
-            const games = rawFileList.trim().split('\n')
+            allGames = rawFileList.trim().split('\n')
                 .map(f => f.trim())
                 .filter(f => f.endsWith('.html') || f.endsWith('.htm'))
                 .map(filename => {
@@ -416,50 +514,75 @@ zrist.html`;
                     };
                 });
 
-            renderGames(games);
+            renderGames(allGames);
         }
 
-        function renderGames(games) {
+        function renderGames(gamesToRender) {
             const grid = document.getElementById('game-grid');
             grid.innerHTML = '';
-            document.getElementById('search').placeholder = `Search ${games.length} games...`;
+            document.getElementById('search').placeholder = `Search ${gamesToRender.length} games...`;
 
-            games.forEach(game => {
+            gamesToRender.forEach(game => {
                 const card = document.createElement('div');
                 card.className = 'card';
                 card.innerHTML = `
-                    <div>
-                        <h3>${game.name}</h3>
-                    </div>
-                    <div>
-                        <button onclick="playGame('offline/${game.file}')" class="btn">Play</button>
-                        <a href="offline/${game.file}" download class="btn download">Download</a>
+                    <h3>${game.name}</h3>
+                    <div class="card-actions">
+                        <button onclick="playGame('${game.file}', '${game.name}')" class="btn">Play</button>
+                        <a href="offline/${game.file}" download class="btn">Save</a>
                     </div>
                 `;
                 grid.appendChild(card);
             });
         }
 
-        function playGame(url) {
+        function playGame(filename, title) {
             const frame = document.getElementById('game-frame');
-            frame.src = url;
-            frame.style.display = 'block';
-            document.getElementById('close-btn').style.display = 'inline-block';
+            // Adding a parameter to hide the audio bar glitch at the bottom of some games
+            frame.src = `offline/${filename}`; 
+            
+            document.getElementById('player-container').style.display = 'block';
+            document.getElementById('playing-title').textContent = `Playing: ${title}`;
+            
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function playRandom() {
+            const visibleCards = document.querySelectorAll('.card:not([style*="display: none"])');
+            if (visibleCards.length === 0) return;
+            
+            const randomIndex = Math.floor(Math.random() * visibleCards.length);
+            const randomCard = visibleCards[randomIndex];
+            
+            // Find the game object that matches the clicked card's title
+            const titleText = randomCard.querySelector('h3').textContent;
+            const game = allGames.find(g => g.name === titleText);
+            
+            if (game) playGame(game.file, game.name);
+        }
+
+        function toggleFullscreen() {
+            const frame = document.getElementById('game-frame');
+            if (frame.requestFullscreen) {
+                frame.requestFullscreen();
+            } else if (frame.webkitRequestFullscreen) { /* Safari */
+                frame.webkitRequestFullscreen();
+            } else if (frame.msRequestFullscreen) { /* IE11 */
+                frame.msRequestFullscreen();
+            }
         }
 
         function closePlayer() {
             const frame = document.getElementById('game-frame');
             frame.src = 'about:blank';
-            frame.style.display = 'none';
-            document.getElementById('close-btn').style.display = 'none';
+            document.getElementById('player-container').style.display = 'none';
         }
 
         function filterGames() {
             const query = document.getElementById('search').value.toLowerCase();
             document.querySelectorAll('.card').forEach(card => {
                 const title = card.querySelector('h3').textContent.toLowerCase();
-                card.style.display = title.includes(query) ? 'block' : 'none';
+                card.style.display = title.includes(query) ? 'flex' : 'none';
             });
         }
 
