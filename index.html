@@ -336,6 +336,19 @@
 
         .empty-state .link-text { text-shadow: 0 0 6px var(--neon); }
 
+        /* Category headers */
+        .category-header {
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 18px;
+            color: var(--neon);
+            text-shadow: 0 0 4px var(--neon);
+            border-left: 4px solid var(--neon);
+            padding-left: 12px;
+            font-family: "Comic Sans MS", "Comic Sans", cursive;
+            letter-spacing: 1px;
+        }
+
         @media (max-width: 600px) {
             body { padding: 15px; }
             h1 { font-size: 26px; }
@@ -378,6 +391,13 @@
         <div class="console-tag"><strong>Other</strong>3DO, ColecoVision, Odyssey 2, WonderSwan</div>
     </div>
 
+    <!-- Eaglercraft Section -->
+    <h2>Eaglercraft</h2>
+    <div class="intro-text">
+        <p>Play Minecraft 1.8.9 in your browser via Eaglercraft WASM build. No installation needed!</p>
+    </div>
+    <button class="btn emulation-btn" onclick="playGame('eaglercraft1-8-wasm.html', 'Eaglercraft 1.8.9 WASM')">Launch Eaglercraft 1.8.9</button>
+
     <!-- Game Library -->
     <h2>Game Library</h2>
     <div class="controls">
@@ -385,7 +405,7 @@
         <button class="btn" onclick="playRandom()">Surprise Me</button>
     </div>
 
-    <div class="grid" id="game-grid"></div>
+    <div id="game-library-container"></div>
 
     <div class="footer">
         <span class="link-text" onclick="scrollToTop()">Back to top</span> &middot; Thorium Megathread 26-27 &middot; Runs offline from a single HTML file.
@@ -748,6 +768,38 @@ zrist.html`;
 
         let allGames = [];
 
+        // Categorization helper
+        function getCategory(filename) {
+            const name = filename.replace('.html', '').replace('.htm', '').toLowerCase();
+            
+            // Action / shooter / fighting
+            if (/fnaf|shooter|superhot|stick-fighter|murder|getaway|zombie|knight|war|gladi|battle|combat|sniper|archer|bow|tank|flee|escape|prison|heist|robbery|steal|diamond|infiltrat|airship|backrooms|granny|evil|glitch|they-are-coming|deadly|death|chase|we-become|tomb|temple|mask|madness|doom|wolf|quake|halo|call-of|battlefield|pubg|fortnite|among-us|fall-guys|squid/i.test(name)) return 'Action & Shooter';
+            
+            // Racing / driving
+            if (/race|racing|drift|car|moto|bike|wheel|truck|monster|stunt|highway|traffic|parking|derby|kart|speed|turbo|nitro|driving|road|racer|slope|hover|rocket-league|sled|snow-rider|snow-road|moto-x3m|madalin|burnout|need-for|gran-turismo|f1/i.test(name)) return 'Racing & Driving';
+            
+            // Sports
+            if (/soccer|football|basket|baseball|tennis|golf|boxing|wrestle|volley|ping-pong|table-tennis|8-ball|pool|billiard|bowl|hockey|rugby|cricket|dodgeball|karate|ufc|mma|skate|surf|extreme|olympic|sports|champion|league|cup|tournament/i.test(name)) return 'Sports';
+            
+            // Puzzle / strategy / board
+            if (/2048|chess|checkers|minesweeper|sudoku|solitaire|tetris|tetromino|stack|bloxorz|circlo|riddle|quiz|trivia|wordle|alchemy|merge|idle|clicker|cookie|tap|sand|sandbox|city|openTTD|polytrack|level-devil|trap|impossible|only-level|there-is-no|opposite|guess|melon|kitty|pou|doodle|jump|helix|ball|bounce|stacktris|stack|sort|match|memory|logic|brain|puzzle|strategy|tower-defense|bloons|plants-vs|pvz|clash|age-of|war|empire|civilization|anno|tropico|simcity|the-sims|tycoon|rollercoaster|zoo|hospital|game-dev|papa|baker|burger|cheese|cupcake|donut|freeze|hot-dog|pancake|pasta|pizza|scoop|sushi|taco|wing|jacksmith|motherload|noob-miner|sand-game|sandbox-city|short-life|six-cats|zrist/i.test(name)) return 'Puzzle & Strategy';
+            
+            // Platformers / adventure
+            if (/mario|sonic|zelda|metroid|castlevania|kirby|donkey|crash|spyro|rayman|duck-life|duckling|dadish|fancy-pants|fireboy|watergirl|cut-the-rope|bob-the-robber|bacon|bad-ice|bad-pig|baldi|granny|slender|amnesia|penumbra|outlast|limbo|inside|little-nightmare|hollow-knight|ori|celeste|super-meat|dead-cells|rogue|adventure|platform|jump|run|dash|jump|jetpack|joyride|eagle-ride|free-rider|get-on-top|happy-wheels|house-of-hazards|ice-dodo|iron-snout|learn-to-fly|ovo|picos|red-ball|rooftop|run|space-is-key|space-waves|tanuki|unicycle|vex|wheely|worlds-hardest|unfair|mario|retro|pixel|speedrun|geometry|dash|vibes|sprunki|choppy|jumping-shell|kittytoy|poor-bunny|short-life/i.test(name)) return 'Platformer & Adventure';
+            
+            // IO / .io games / multiplayer
+            if (/\.io|1v1|agar|slither|diep|surviv|zombs|krunker|shell|territorial|state|snowball|hole|paper|cleanup|cluster|ducklings|yohoho|tag|tunnel-rush|slope|1-on-1|12-mini|1v1\.lol/i.test(name)) return 'IO & Multiplayer';
+            
+            // Simulation / sandbox / casual
+            if (/simulator|sim|sandbox|city|tycoon|farm|builder|craft|mine|terraria|stardew|animal-crossing|harvest|moon|gardening|fishing|tiny-fishing|car-drawing|draw-climber|melon|playground|plonky|slow-roads|sand-game|sandbox-city|idle|clicker|cookie|spacebar|capybara|bitlife|eugenes-life|bit-planes|territorial|openTTD|polytrack|not|baldis|friday-night|funkin|rhythm|music|dance|beat|guitar|piano|osu|geometry|dash|sprunki|incredibox|scratch|cat|kitty|pou|virtual|pet|tamagotchi|neo|pet|dino|google-dino|flappy|bird/i.test(name)) return 'Simulation & Casual';
+            
+            // Retro / classic
+            if (/pac-man|space-invaders|asteroids|centipede|galaga|dig-dug|frogger|qbert|tetris|pong|breakout|arcade|retro|classic|atari|nes|snes|sega|genesis|n64|gameboy|gba|ps1|playstation|mame|neo-geo|cps|emulat|webretro/i.test(name)) return 'Retro & Arcade';
+            
+            // Fallback
+            return 'Other';
+        }
+
         function loadGames() {
             allGames = rawFileList.trim().split('\n')
                 .map(f => f.trim())
@@ -756,41 +808,63 @@ zrist.html`;
                     let prettyName = filename.replace('.html', '').replace('.htm', '').replace(/-/g, ' ').replace(/_/g, ' ').toUpperCase();
                     return {
                         name: prettyName,
-                        file: filename
+                        file: filename,
+                        category: getCategory(filename)
                     };
                 });
 
-            renderGames(allGames);
+            renderGamesByCategory(allGames);
         }
 
-        function renderGames(gamesToRender) {
-            const grid = document.getElementById('game-grid');
-            grid.innerHTML = '';
-            document.getElementById('search').placeholder = `Search ${gamesToRender.length} games...`;
+        function renderGamesByCategory(games) {
+            const container = document.getElementById('game-library-container');
+            container.innerHTML = '';
+            document.getElementById('search').placeholder = `Search ${games.length} games...`;
 
-            if (gamesToRender.length === 0) {
-                grid.innerHTML = '<div class="empty-state">No games found. <span class="link-text" onclick="clearSearch()">Clear search</span></div>';
+            if (games.length === 0) {
+                container.innerHTML = '<div class="empty-state">No games found. <span class="link-text" onclick="clearSearch()">Clear search</span></div>';
                 return;
             }
 
-            gamesToRender.forEach(game => {
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.innerHTML = `
-                    <h3>${game.name}</h3>
-                    <div class="card-actions">
-                        <button onclick="playGame('${game.file}', '${game.name}')" class="btn play-btn">Play</button>
-                        <a href="offline/${game.file}" download class="btn save-btn">Save</a>
-                    </div>
-                `;
-                grid.appendChild(card);
+            // Group by category
+            const categories = {};
+            games.forEach(game => {
+                if (!categories[game.category]) categories[game.category] = [];
+                categories[game.category].push(game);
+            });
+
+            // Sort categories by name
+            const sortedCategories = Object.keys(categories).sort();
+
+            sortedCategories.forEach(cat => {
+                const header = document.createElement('div');
+                header.className = 'category-header';
+                header.textContent = `// ${cat} (${categories[cat].length})`;
+                container.appendChild(header);
+
+                const grid = document.createElement('div');
+                grid.className = 'grid';
+                grid.style.marginBottom = '25px';
+
+                categories[cat].sort((a, b) => a.name.localeCompare(b.name)).forEach(game => {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    card.innerHTML = `
+                        <h3>${game.name}</h3>
+                        <div class="card-actions">
+                            <button onclick="playGame('${game.file}', '${game.name}')" class="btn play-btn">Play</button>
+                            <a href="offline/${game.file}" download class="btn save-btn">Save</a>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+
+                container.appendChild(grid);
             });
         }
 
         function playGame(filename, title) {
             const frame = document.getElementById('game-frame');
-            
-            // Everything (including WebRetro) is in the offline folder
             frame.src = `offline/${filename}`;
 
             document.getElementById('player-container').style.display = 'block';
@@ -831,26 +905,19 @@ zrist.html`;
 
         function filterGames() {
             const query = document.getElementById('search').value.toLowerCase();
-            let visibleCount = 0;
-            document.querySelectorAll('.card').forEach(card => {
-                const title = card.querySelector('h3').textContent.toLowerCase();
-                const match = title.includes(query);
-                card.style.display = match ? 'flex' : 'none';
-                if (match) visibleCount++;
-            });
-
-            let empty = document.querySelector('.empty-state');
-            if (visibleCount === 0) {
-                if (!empty) {
-                    empty = document.createElement('div');
-                    empty.className = 'empty-state';
-                    empty.innerHTML = 'No games found. <span class="link-text" onclick="clearSearch()">Clear search</span>';
-                    document.getElementById('game-grid').appendChild(empty);
-                }
-                empty.style.display = 'block';
-            } else if (empty) {
-                empty.style.display = 'none';
+            
+            if (query.trim() === '') {
+                renderGamesByCategory(allGames);
+                return;
             }
+
+            const filtered = allGames.filter(game => 
+                game.name.toLowerCase().includes(query) || 
+                game.category.toLowerCase().includes(query) ||
+                game.file.toLowerCase().includes(query)
+            );
+
+            renderGamesByCategory(filtered);
         }
 
         function clearSearch() {
