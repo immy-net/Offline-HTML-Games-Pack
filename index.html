@@ -25,17 +25,20 @@
             font-family: "Courier New", Courier, monospace;
             background-color: var(--bg);
             color: var(--text);
-            padding: 30px;
+            padding: 40px;
             text-align: left;
-            margin: 0;
+            margin: 20px;
             line-height: 1.6;
+            /* Green neon border around the whole site */
+            border: 2px solid var(--neon);
+            box-shadow: 0 0 15px var(--neon-soft), inset 0 0 15px var(--neon-soft);
         }
 
         ::selection { background: var(--neon); color: #000; }
         ::-moz-selection { background: var(--neon); color: #000; }
 
         ::-webkit-scrollbar { width: 12px; height: 12px; }
-        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-track { background: #000; border-left: 1px solid var(--border); }
         ::-webkit-scrollbar-thumb { background: #222; border: 2px solid #000; }
         ::-webkit-scrollbar-thumb:hover { background: var(--neon-soft); }
 
@@ -67,7 +70,9 @@
             margin-top: 30px;
             border-bottom: 1px solid var(--border);
             padding-bottom: 5px;
-            display: inline-block;
+            /* Block display forces the heading to take up its own row */
+            display: block;
+            width: fit-content;
         }
 
         .subtitle {
@@ -103,6 +108,13 @@
             color: var(--text);
             margin-bottom: 30px;
             font-size: 16px;
+        }
+
+        /* Grouping wrapper to ensure sections don't sit side-by-side */
+        .section-block {
+            display: block;
+            width: 100%;
+            margin-bottom: 40px;
         }
 
         .controls {
@@ -357,7 +369,7 @@
         }
 
         @media (max-width: 600px) {
-            body { padding: 15px; }
+            body { padding: 15px; margin: 10px; }
             h1 { font-size: 26px; }
             #search { width: 100%; }
             iframe { height: 400px; }
@@ -383,38 +395,41 @@
         <iframe id="game-frame" allow="fullscreen; autoplay; gamepad" allowfullscreen tabindex="0"></iframe>
     </div>
 
-    <!-- Emulation Section -->
-    <h2>Emulation</h2>
-    <div class="intro-text">
-        <p>Play classic retro console games directly in your browser using WebRetro. Just click launch, select your system, and load a ROM file!</p>
-    </div>
-    
-    <button class="btn emulation-btn" onclick="playGame('webretro-standalone.html', 'WebRetro Emulator')">Launch WebRetro</button>
+    <!-- Section: Emulation & Eaglercraft -->
+    <div class="section-block">
+        <h2>Emulation</h2>
+        <div class="intro-text">
+            <p>Play classic retro console games directly in your browser using WebRetro. Just click launch, select your system, and load a ROM file!</p>
+        </div>
+        
+        <button class="btn emulation-btn" onclick="playGame('webretro-standalone.html', 'WebRetro Emulator')">Launch WebRetro</button>
 
-    <div class="console-grid">
-        <div class="console-tag"><strong>Nintendo</strong>NES, SNES, N64, GB, GBC, GBA, DS</div>
-        <div class="console-tag"><strong>Sega</strong>Genesis, Master System, Saturn</div>
-        <div class="console-tag"><strong>Sony</strong>PlayStation (PS1)</div>
-        <div class="console-tag"><strong>Atari</strong>2600, 5200, 7800, Lynx, Jaguar</div>
-        <div class="console-tag"><strong>Arcade</strong>MAME, Neo-Geo, CPS1/2/3</div>
-        <div class="console-tag"><strong>Other</strong>3DO, ColecoVision, Odyssey 2, WonderSwan</div>
-    </div>
+        <div class="console-grid">
+            <div class="console-tag"><strong>Nintendo</strong>NES, SNES, N64, GB, GBC, GBA, DS</div>
+            <div class="console-tag"><strong>Sega</strong>Genesis, Master System, Saturn</div>
+            <div class="console-tag"><strong>Sony</strong>PlayStation (PS1)</div>
+            <div class="console-tag"><strong>Atari</strong>2600, 5200, 7800, Lynx, Jaguar</div>
+            <div class="console-tag"><strong>Arcade</strong>MAME, Neo-Geo, CPS1/2/3</div>
+            <div class="console-tag"><strong>Other</strong>3DO, ColecoVision, Odyssey 2, WonderSwan</div>
+        </div>
 
-    <!-- Eaglercraft Section -->
-    <h2>Eaglercraft</h2>
-    <div class="intro-text">
-        <p>Play Minecraft 1.8.9 in your browser via Eaglercraft WASM build. No installation needed!</p>
-    </div>
-    <button class="btn emulation-btn" onclick="playGame('eaglercraft1-8-wasm.html', 'Eaglercraft 1.8.9 WASM')">Launch Eaglercraft 1.8.9</button>
-
-    <!-- Game Library -->
-    <h2>Game Library</h2>
-    <div class="controls">
-        <input type="text" id="search" placeholder="Search games..." onkeyup="filterGames()">
-        <button class="btn" onclick="playRandom()">Surprise Me</button>
+        <h2>Eaglercraft</h2>
+        <div class="intro-text">
+            <p>Play Minecraft 1.8.9 in your browser via Eaglercraft WASM build. No installation needed!</p>
+        </div>
+        <button class="btn emulation-btn" onclick="playGame('eaglercraft1-8-wasm.html', 'Eaglercraft 1.8.9 WASM')">Launch Eaglercraft 1.8.9</button>
     </div>
 
-    <div id="game-library-container"></div>
+    <!-- Section: Game Library -->
+    <div class="section-block">
+        <h2>Game Library</h2>
+        <div class="controls">
+            <input type="text" id="search" placeholder="Search games..." onkeyup="filterGames()">
+            <button class="btn" onclick="playRandom()">Surprise Me</button>
+        </div>
+
+        <div id="game-library-container"></div>
+    </div>
 
     <div class="footer">
         <span class="link-text" onclick="scrollToTop()">Back to top</span> &middot; Thorium Megathread 26-27 &middot; Runs offline from a single HTML file.
