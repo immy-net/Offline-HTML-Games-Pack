@@ -4,68 +4,132 @@
     <title>Thorium Games Megathread 26-27</title>
     <meta charset="utf-8">
     <style>
+        /* ============================================================
+           THORIUM NEON THEME
+           Pure black + one accent (#00ff00) + zero-offset blurred
+           shadows for glow + hard hover inversion + mono/cursive clash.
+           ============================================================ */
+
+        :root {
+            --neon: #00ff00;
+            --neon-soft: rgba(0, 255, 0, 0.3);
+            --neon-dim: rgba(0, 255, 0, 0.6);
+            --bg: #000000;
+            --border: #333333;
+            --border-bright: #555555;
+            --text: #ffffff;
+            --muted: #888888;
+        }
+
         /* Base Vibe */
+        * { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
         body {
             font-family: "Courier New", Courier, monospace;
-            background-color: #000000;
-            color: #ffffff;
+            background-color: var(--bg);
+            color: var(--text);
             padding: 30px;
             text-align: left;
             margin: 0;
             line-height: 1.6;
         }
 
+        /* Selection matches the theme */
+        ::selection {
+            background: var(--neon);
+            color: #000;
+        }
+        ::-moz-selection {
+            background: var(--neon);
+            color: #000;
+        }
+
+        /* Scrollbar (WebKit) */
+        ::-webkit-scrollbar { width: 12px; height: 12px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb {
+            background: #222;
+            border: 2px solid #000;
+        }
+        ::-webkit-scrollbar-thumb:hover { background: var(--neon-soft); }
+
         /* Typography */
         h1 {
             font-family: "Comic Sans MS", "Comic Sans", cursive;
-            color: #00ff00;
-            text-shadow: 0 0 5px #00ff00;
+            color: var(--neon);
+            text-shadow: 0 0 5px var(--neon), 0 0 12px rgba(0, 255, 0, 0.4);
             font-size: 36px;
             margin-top: 0;
             margin-bottom: 5px;
             font-weight: normal;
+            animation: neon-pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes neon-pulse {
+            0%, 100% {
+                text-shadow: 0 0 5px var(--neon), 0 0 12px rgba(0, 255, 0, 0.4);
+            }
+            50% {
+                text-shadow: 0 0 8px var(--neon), 0 0 20px rgba(0, 255, 0, 0.6);
+            }
         }
 
         h2, h3 {
             font-family: "Comic Sans MS", "Comic Sans", cursive;
-            color: #00ff00;
-            text-shadow: 0 0 3px #00ff00;
+            color: var(--neon);
+            text-shadow: 0 0 3px var(--neon), 0 0 8px rgba(0, 255, 0, 0.3);
             font-weight: normal;
         }
 
-        h2 { font-size: 24px; margin-top: 30px; border-bottom: 1px solid #333; padding-bottom: 5px; display: inline-block;}
-        
+        h2 {
+            font-size: 24px;
+            margin-top: 30px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 5px;
+            display: inline-block;
+        }
+
         /* Links & Accents */
         .subtitle {
-            color: #ffffff;
+            color: var(--text);
             font-size: 18px;
             margin-bottom: 30px;
             text-decoration: underline;
-            text-decoration-color: #00ff00;
+            text-decoration-color: var(--neon);
             text-decoration-thickness: 2px;
+            text-underline-offset: 4px;
             cursor: pointer;
+            text-shadow: 0 0 4px rgba(0, 255, 0, 0.3);
         }
-        
+
         a, .link-text {
-            color: #00ff00;
+            color: var(--neon);
             text-decoration: underline;
-            text-decoration-color: #00ff00;
+            text-decoration-color: var(--neon);
             text-decoration-thickness: 2px;
             cursor: pointer;
+            text-shadow: 0 0 4px rgba(0, 255, 0, 0.4);
         }
-        
+
         a:hover, .link-text:hover {
-            background-color: #00ff00;
+            background-color: var(--neon);
             color: #000;
             text-decoration: none;
+            text-shadow: none;
         }
 
         /* Intro Section */
         .intro-text {
             max-width: 900px;
-            color: #ffffff;
+            color: var(--text);
             margin-bottom: 30px;
             font-size: 16px;
+        }
+
+        .intro-text p {
+            margin: 0 0 10px 0;
         }
 
         /* Controls Container */
@@ -76,126 +140,207 @@
             align-items: center;
             flex-wrap: wrap;
         }
-        
+
         #search {
-            padding: 10px; 
+            padding: 10px;
             width: 300px;
             background-color: #000;
             color: #fff;
-            border: 2px solid #555;
-            font-family: "Courier New", Courier, monospace; 
+            border: 2px solid var(--border-bright);
+            font-family: "Courier New", Courier, monospace;
             font-size: 16px;
             outline: none;
             transition: 0.2s;
+            text-shadow: 0 0 4px rgba(0, 255, 0, 0.2);
         }
-        
+
         #search:focus {
-            border-color: #00ff00;
-            box-shadow: 0 0 5px #00ff00;
+            border-color: var(--neon);
+            box-shadow: 0 0 5px var(--neon), 0 0 15px rgba(0, 255, 0, 0.2);
+            text-shadow: 0 0 6px rgba(0, 255, 0, 0.5);
         }
-        
-        #search::placeholder { color: #888; }
+
+        #search::placeholder {
+            color: var(--muted);
+            text-shadow: none;
+        }
 
         .btn {
             padding: 10px 15px;
             background-color: #000;
             color: #fff;
-            border: 2px solid #555;
+            border: 2px solid var(--border-bright);
             font-family: "Courier New", Courier, monospace;
             font-size: 16px;
             cursor: pointer;
             text-transform: uppercase;
             transition: 0.2s;
+            text-shadow: 0 0 4px rgba(0, 255, 0, 0.2);
         }
-        
+
         .btn:hover {
-            border-color: #00ff00;
-            color: #00ff00;
-            box-shadow: 0 0 5px #00ff00;
+            border-color: var(--neon);
+            color: var(--neon);
+            box-shadow: 0 0 5px var(--neon), 0 0 15px rgba(0, 255, 0, 0.2);
+            text-shadow: 0 0 6px var(--neon);
         }
-        
+
+        .btn:active {
+            background-color: var(--neon);
+            color: #000;
+            text-shadow: none;
+            box-shadow: 0 0 10px var(--neon), 0 0 25px rgba(0, 255, 0, 0.4);
+        }
+
         /* Grid Layout */
         .grid {
-            display: grid; 
+            display: grid;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 15px; 
-            max-width: 1200px; 
+            gap: 15px;
+            max-width: 1200px;
         }
-        
+
         .card {
-            background: #000; 
-            border: 2px solid #333; 
-            padding: 15px; 
-            display: flex; 
-            flex-direction: column; 
+            background: #000;
+            border: 2px solid var(--border);
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
             justify-content: space-between;
             transition: 0.2s;
         }
-        
-        .card:hover { 
-            border-color: #00ff00; 
-            box-shadow: 0 0 8px rgba(0, 255, 0, 0.3);
+
+        .card:hover {
+            border-color: var(--neon);
+            box-shadow: 0 0 8px var(--neon-soft), 0 0 20px rgba(0, 255, 0, 0.1);
         }
-        
-        .card h3 { 
-            margin: 0 0 15px 0; 
-            font-size: 15px; 
-            word-wrap: break-word; 
+
+        .card h3 {
+            margin: 0 0 15px 0;
+            font-size: 15px;
+            word-wrap: break-word;
             color: #fff;
-            text-shadow: none;
+            text-shadow: 0 0 4px rgba(0, 255, 0, 0.25);
+            transition: 0.2s;
         }
-        
+
+        .card:hover h3 {
+            color: var(--neon);
+            text-shadow: 0 0 6px var(--neon);
+        }
+
         .card-actions { display: flex; gap: 8px; }
-        
-        .card-actions .btn { 
-            padding: 8px; 
-            font-size: 13px; 
-            flex: 1; 
-            text-align: center; 
+
+        .card-actions .btn {
+            padding: 8px;
+            font-size: 13px;
+            flex: 1;
+            text-align: center;
             text-decoration: none;
-            border-color: #333;
+            border-color: var(--border);
             color: #fff;
         }
 
         .card-actions .btn.play-btn:hover {
-            border-color: #00ff00;
-            color: #00ff00;
+            border-color: var(--neon);
+            color: var(--neon);
+            box-shadow: 0 0 5px var(--neon-soft);
+            text-shadow: 0 0 6px var(--neon);
         }
 
         .card-actions .btn.save-btn:hover {
             border-color: #fff;
             color: #fff;
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+            text-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
         }
 
         /* Player Area */
-        .player-container { 
-            display: none; 
-            margin-bottom: 25px; 
-            border: 2px solid #00ff00; 
+        .player-container {
+            display: none;
+            margin-bottom: 25px;
+            border: 2px solid var(--neon);
             padding: 15px;
             background: #000;
-            box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+            box-shadow: 0 0 10px var(--neon-soft), 0 0 30px rgba(0, 255, 0, 0.1);
         }
-        
+
         .player-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
         }
-        
-        .player-header h2 { 
-            margin: 0; 
-            font-size: 20px; 
-            color: #00ff00;
+
+        .player-header h2 {
+            margin: 0;
+            font-size: 20px;
+            color: var(--neon);
             border: none;
+            text-shadow: 0 0 5px var(--neon), 0 0 12px rgba(0, 255, 0, 0.4);
         }
-        
-        iframe { 
-            width: 100%; 
-            height: 600px; 
-            border: none; 
-            background: #fff; 
+
+        .player-header > div {
+            display: flex;
+            gap: 8px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+            background: #fff;
+        }
+
+        /* Close button keeps its red accent but gets a glow */
+        .btn.close-btn {
+            border-color: #ff3333;
+            color: #ff3333;
+            text-shadow: 0 0 4px rgba(255, 51, 51, 0.4);
+        }
+        .btn.close-btn:hover {
+            background-color: #ff3333;
+            color: #000;
+            border-color: #ff3333;
+            box-shadow: 0 0 5px #ff3333, 0 0 15px rgba(255, 51, 51, 0.3);
+            text-shadow: none;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 40px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 13px;
+            text-shadow: 0 0 3px rgba(0, 255, 0, 0.15);
+        }
+
+        .footer .link-text {
+            text-shadow: 0 0 4px rgba(0, 255, 0, 0.4);
+        }
+
+        /* Empty state for search */
+        .empty-state {
+            grid-column: 1 / -1;
+            color: var(--muted);
+            font-size: 16px;
+            padding: 20px 0;
+            text-shadow: 0 0 4px rgba(0, 255, 0, 0.2);
+        }
+
+        .empty-state .link-text {
+            text-shadow: 0 0 6px var(--neon);
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            body { padding: 15px; }
+            h1 { font-size: 26px; }
+            #search { width: 100%; }
+            iframe { height: 400px; }
         }
     </style>
 </head>
@@ -210,7 +355,7 @@
             <h2 id="playing-title">Playing...</h2>
             <div>
                 <button class="btn" onclick="toggleFullscreen()">Fullscreen</button>
-                <button class="btn" onclick="closePlayer()" style="border-color: #ff3333; color: #ff3333;">Close Game</button>
+                <button class="btn close-btn" onclick="closePlayer()">Close Game</button>
             </div>
         </div>
         <iframe id="game-frame" allow="fullscreen; autoplay; gamepad" allowfullscreen></iframe>
@@ -224,6 +369,10 @@
     </div>
 
     <div class="grid" id="game-grid"></div>
+
+    <div class="footer">
+        <span class="link-text" onclick="scrollToTop()">Back to top</span> &middot; Thorium Megathread 26-27 &middot; Runs offline from a single HTML file.
+    </div>
 
     <script>
         // The exact list you provided
@@ -602,6 +751,11 @@ zrist.html`;
             grid.innerHTML = '';
             document.getElementById('search').placeholder = `Search ${gamesToRender.length} games...`;
 
+            if (gamesToRender.length === 0) {
+                grid.innerHTML = '<div class="empty-state">No games found. <span class="link-text" onclick="clearSearch()">Clear search</span></div>';
+                return;
+            }
+
             gamesToRender.forEach(game => {
                 const card = document.createElement('div');
                 card.className = 'card';
@@ -618,24 +772,24 @@ zrist.html`;
 
         function playGame(filename, title) {
             const frame = document.getElementById('game-frame');
-            frame.src = `offline/${filename}`; 
-            
+            frame.src = `offline/${filename}`;
+
             document.getElementById('player-container').style.display = 'block';
             document.getElementById('playing-title').textContent = `Playing: ${title}`;
-            
+
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function playRandom() {
             const visibleCards = document.querySelectorAll('.card:not([style*="display: none"])');
             if (visibleCards.length === 0) return;
-            
+
             const randomIndex = Math.floor(Math.random() * visibleCards.length);
             const randomCard = visibleCards[randomIndex];
-            
+
             const titleText = randomCard.querySelector('h3').textContent;
             const game = allGames.find(g => g.name === titleText);
-            
+
             if (game) playGame(game.file, game.name);
         }
 
@@ -658,10 +812,36 @@ zrist.html`;
 
         function filterGames() {
             const query = document.getElementById('search').value.toLowerCase();
+            let visibleCount = 0;
             document.querySelectorAll('.card').forEach(card => {
                 const title = card.querySelector('h3').textContent.toLowerCase();
-                card.style.display = title.includes(query) ? 'flex' : 'none';
+                const match = title.includes(query);
+                card.style.display = match ? 'flex' : 'none';
+                if (match) visibleCount++;
             });
+
+            // Show/hide empty state
+            let empty = document.querySelector('.empty-state');
+            if (visibleCount === 0) {
+                if (!empty) {
+                    empty = document.createElement('div');
+                    empty.className = 'empty-state';
+                    empty.innerHTML = 'No games found. <span class="link-text" onclick="clearSearch()">Clear search</span>';
+                    document.getElementById('game-grid').appendChild(empty);
+                }
+                empty.style.display = 'block';
+            } else if (empty) {
+                empty.style.display = 'none';
+            }
+        }
+
+        function clearSearch() {
+            document.getElementById('search').value = '';
+            filterGames();
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         // Start the app
