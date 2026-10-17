@@ -790,12 +790,8 @@ zrist.html`;
         function playGame(filename, title) {
             const frame = document.getElementById('game-frame');
             
-            // If it's an external emulator, we don't prepend the 'offline/' folder
-            if (filename === 'webretro-standalone.html') {
-                frame.src = filename;
-            } else {
-                frame.src = `offline/${filename}`;
-            }
+            // Everything (including WebRetro) is in the offline folder
+            frame.src = `offline/${filename}`;
 
             document.getElementById('player-container').style.display = 'block';
             document.getElementById('playing-title').textContent = `Playing: ${title}`;
