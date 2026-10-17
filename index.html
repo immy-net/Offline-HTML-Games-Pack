@@ -6,10 +6,7 @@
     <style>
         /* ============================================================
            THORIUM NEON THEME
-           Pure black + one accent (#00ff00) + zero-offset blurred
-           shadows for glow + hard hover inversion + mono/cursive clash.
            ============================================================ */
-
         :root {
             --neon: #00ff00;
             --neon-soft: rgba(0, 255, 0, 0.3);
@@ -21,9 +18,7 @@
             --muted: #888888;
         }
 
-        /* Base Vibe */
         * { box-sizing: border-box; }
-
         html { scroll-behavior: smooth; }
 
         body {
@@ -36,26 +31,14 @@
             line-height: 1.6;
         }
 
-        /* Selection matches the theme */
-        ::selection {
-            background: var(--neon);
-            color: #000;
-        }
-        ::-moz-selection {
-            background: var(--neon);
-            color: #000;
-        }
+        ::selection { background: var(--neon); color: #000; }
+        ::-moz-selection { background: var(--neon); color: #000; }
 
-        /* Scrollbar (WebKit) */
         ::-webkit-scrollbar { width: 12px; height: 12px; }
         ::-webkit-scrollbar-track { background: #000; }
-        ::-webkit-scrollbar-thumb {
-            background: #222;
-            border: 2px solid #000;
-        }
+        ::-webkit-scrollbar-thumb { background: #222; border: 2px solid #000; }
         ::-webkit-scrollbar-thumb:hover { background: var(--neon-soft); }
 
-        /* Typography */
         h1 {
             font-family: "Comic Sans MS", "Comic Sans", cursive;
             color: var(--neon);
@@ -68,12 +51,8 @@
         }
 
         @keyframes neon-pulse {
-            0%, 100% {
-                text-shadow: 0 0 5px var(--neon), 0 0 12px rgba(0, 255, 0, 0.4);
-            }
-            50% {
-                text-shadow: 0 0 8px var(--neon), 0 0 20px rgba(0, 255, 0, 0.6);
-            }
+            0%, 100% { text-shadow: 0 0 5px var(--neon), 0 0 12px rgba(0, 255, 0, 0.4); }
+            50% { text-shadow: 0 0 8px var(--neon), 0 0 20px rgba(0, 255, 0, 0.6); }
         }
 
         h2, h3 {
@@ -91,7 +70,6 @@
             display: inline-block;
         }
 
-        /* Links & Accents */
         .subtitle {
             color: var(--text);
             font-size: 18px;
@@ -120,7 +98,6 @@
             text-shadow: none;
         }
 
-        /* Intro Section */
         .intro-text {
             max-width: 900px;
             color: var(--text);
@@ -128,11 +105,6 @@
             font-size: 16px;
         }
 
-        .intro-text p {
-            margin: 0 0 10px 0;
-        }
-
-        /* Controls Container */
         .controls {
             display: flex;
             gap: 15px;
@@ -160,10 +132,7 @@
             text-shadow: 0 0 6px rgba(0, 255, 0, 0.5);
         }
 
-        #search::placeholder {
-            color: var(--muted);
-            text-shadow: none;
-        }
+        #search::placeholder { color: var(--muted); text-shadow: none; }
 
         .btn {
             padding: 10px 15px;
@@ -192,7 +161,6 @@
             box-shadow: 0 0 10px var(--neon), 0 0 25px rgba(0, 255, 0, 0.4);
         }
 
-        /* Grid Layout */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -224,10 +192,7 @@
             transition: 0.2s;
         }
 
-        .card:hover h3 {
-            color: var(--neon);
-            text-shadow: 0 0 6px var(--neon);
-        }
+        .card:hover h3 { color: var(--neon); text-shadow: 0 0 6px var(--neon); }
 
         .card-actions { display: flex; gap: 8px; }
 
@@ -253,6 +218,52 @@
             color: #fff;
             box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
             text-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+        }
+
+        /* Console Section Styles */
+        .console-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            max-width: 1200px;
+            margin-bottom: 40px;
+        }
+
+        .console-tag {
+            background: #000;
+            border: 1px solid var(--border);
+            padding: 10px;
+            font-size: 14px;
+            color: var(--muted);
+            text-align: center;
+            transition: 0.2s;
+        }
+        
+        .console-tag:hover {
+            border-color: var(--neon);
+            color: var(--neon);
+            box-shadow: 0 0 5px var(--neon-soft);
+        }
+
+        .console-tag strong {
+            color: #fff;
+            display: block;
+            margin-bottom: 3px;
+        }
+        .console-tag:hover strong { color: var(--neon); }
+
+        .emulation-btn {
+            font-size: 18px;
+            padding: 15px 30px;
+            margin-bottom: 20px;
+            border-color: var(--neon);
+            color: var(--neon);
+            box-shadow: 0 0 10px var(--neon-soft);
+        }
+        .emulation-btn:hover {
+            background-color: var(--neon);
+            color: #000;
+            box-shadow: 0 0 20px var(--neon);
         }
 
         /* Player Area */
@@ -282,10 +293,7 @@
             text-shadow: 0 0 5px var(--neon), 0 0 12px rgba(0, 255, 0, 0.4);
         }
 
-        .player-header > div {
-            display: flex;
-            gap: 8px;
-        }
+        .player-header > div { display: flex; gap: 8px; }
 
         iframe {
             width: 100%;
@@ -294,7 +302,6 @@
             background: #fff;
         }
 
-        /* Close button keeps its red accent but gets a glow */
         .btn.close-btn {
             border-color: #ff3333;
             color: #ff3333;
@@ -308,7 +315,6 @@
             text-shadow: none;
         }
 
-        /* Footer */
         .footer {
             margin-top: 40px;
             padding-top: 15px;
@@ -318,11 +324,8 @@
             text-shadow: 0 0 3px rgba(0, 255, 0, 0.15);
         }
 
-        .footer .link-text {
-            text-shadow: 0 0 4px rgba(0, 255, 0, 0.4);
-        }
+        .footer .link-text { text-shadow: 0 0 4px rgba(0, 255, 0, 0.4); }
 
-        /* Empty state for search */
         .empty-state {
             grid-column: 1 / -1;
             color: var(--muted);
@@ -331,11 +334,8 @@
             text-shadow: 0 0 4px rgba(0, 255, 0, 0.2);
         }
 
-        .empty-state .link-text {
-            text-shadow: 0 0 6px var(--neon);
-        }
+        .empty-state .link-text { text-shadow: 0 0 6px var(--neon); }
 
-        /* Responsive */
         @media (max-width: 600px) {
             body { padding: 15px; }
             h1 { font-size: 26px; }
@@ -361,8 +361,25 @@
         <iframe id="game-frame" allow="fullscreen; autoplay; gamepad" allowfullscreen></iframe>
     </div>
 
+    <!-- Emulation Section -->
+    <h2>Emulation</h2>
+    <div class="intro-text">
+        <p>Play classic retro console games directly in your browser using WebRetro. Just click launch, select your system, and load a ROM file!</p>
+    </div>
+    
+    <button class="btn emulation-btn" onclick="playGame('webretro-standalone.html', 'WebRetro Emulator')">Launch WebRetro</button>
+
+    <div class="console-grid">
+        <div class="console-tag"><strong>Nintendo</strong>NES, SNES, N64, GB, GBC, GBA, DS</div>
+        <div class="console-tag"><strong>Sega</strong>Genesis, Master System, Saturn</div>
+        <div class="console-tag"><strong>Sony</strong>PlayStation (PS1)</div>
+        <div class="console-tag"><strong>Atari</strong>2600, 5200, 7800, Lynx, Jaguar</div>
+        <div class="console-tag"><strong>Arcade</strong>MAME, Neo-Geo, CPS1/2/3</div>
+        <div class="console-tag"><strong>Other</strong>3DO, ColecoVision, Odyssey 2, WonderSwan</div>
+    </div>
+
     <!-- Game Library -->
-    <h2>Library</h2>
+    <h2>Game Library</h2>
     <div class="controls">
         <input type="text" id="search" placeholder="Search games..." onkeyup="filterGames()">
         <button class="btn" onclick="playRandom()">Surprise Me</button>
@@ -772,7 +789,13 @@ zrist.html`;
 
         function playGame(filename, title) {
             const frame = document.getElementById('game-frame');
-            frame.src = `offline/${filename}`;
+            
+            // If it's an external emulator, we don't prepend the 'offline/' folder
+            if (filename === 'webretro-standalone.html') {
+                frame.src = filename;
+            } else {
+                frame.src = `offline/${filename}`;
+            }
 
             document.getElementById('player-container').style.display = 'block';
             document.getElementById('playing-title').textContent = `Playing: ${title}`;
@@ -820,7 +843,6 @@ zrist.html`;
                 if (match) visibleCount++;
             });
 
-            // Show/hide empty state
             let empty = document.querySelector('.empty-state');
             if (visibleCount === 0) {
                 if (!empty) {
